@@ -1,4 +1,5 @@
 
+import 'package:admin/userQuest/userquestlist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class Mainpage extends StatelessWidget{
             OutlinedButton.icon(
               // 텍스트버튼에 아이콘 넣기
               onPressed: () {
-                print('Icon button');
+                Get.to(()=> userQuestlist());
               },
               icon: Icon(Icons.wysiwyg, size: 30, color: Colors.black87), // 아이콘 색
               label: Text('학급 관리'),

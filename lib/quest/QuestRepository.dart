@@ -3,7 +3,7 @@ import 'package:get/get_connect/http/src/response/response.dart';
 import '../Dto/CMRespDto.dart';
 import '../Dto/QuestSaveReqDto.dart';
 import '../Dto/UpdateReqDto.dart';
-import '../post.dart';
+import '../model/post.dart';
 import 'QuestProvider.dart';
 
 

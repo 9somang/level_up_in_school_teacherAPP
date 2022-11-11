@@ -1,35 +1,41 @@
 
-import '../user/user.dart';
+import '../../user/user.dart';
 
-class Post {
+class userPost {
   final int? id;
   final String? title;
   final String? discription;
   final int? exp;
   final int? point;
-  final String? class_code;
+  final String? user_id;
   final String? pickedStdate;
   final String? pickedEnddate;
+  final bool? done;
+  final bool? check;
 
-  Post( {
+  userPost( {
     this.id,
     this.title,
     this.discription,
     this.exp,
     this.point,
-    this.class_code,
+    this.user_id,
     this.pickedStdate,
-    this.pickedEnddate
+    this.pickedEnddate,
+    this.done,
+    this.check
   });
 
 
-  Post.fromJson(Map<String, dynamic> json) //외부에서온 데이터를 다트오브젝트로변경
+  userPost.fromJson(Map<String, dynamic> json) //외부에서온 데이터를 다트오브젝트로변경
       : id = json['id'],
         title = json['title'],
         discription = json['description'],
         exp = json['exp'],
         point = json['point'],
-        class_code = json['class_code'],
+        user_id = json['user_id'],
         pickedStdate = json['start_date'],
-        pickedEnddate = json['end_date'];
+        pickedEnddate = json['end_date'],
+        done = json['done'],
+        check = json['check'];
 }

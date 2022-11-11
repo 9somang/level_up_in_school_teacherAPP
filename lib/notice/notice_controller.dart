@@ -1,19 +1,33 @@
 import 'package:get/get.dart';
-import '../post.dart';
+import 'package:intl/intl.dart';
+import '../model/Ntp.dart';
+import '../model/post.dart';
 import 'NoticeRepository.dart';
 
 class NoticeController extends GetxController {
   final NoticeRepository _NoticeRepository = NoticeRepository();
-  final posts = <Post>[].obs;
-  final post = Post().obs;
+  final posts = <NTP>[].obs;
+  final post = NTP().obs;
+  var create_date = DateTime.now();
 
   @override
   void onInit() {
     super.onInit();
   }
 
-  Future<void> Noticesave(String title, String content,username, String school_code)async{
-    Post post = await _NoticeRepository.Noticesave(title,content,username, school_code);
+  Future<void> findAllNoticelist() async {
+    List<NTP> posts = await _NoticeRepository.findAllNoticelist();
+    this.posts.value = posts;
+    print("${posts}");
+  }
+
+  Future<void> findByNoticeId(int id) async {
+    NTP post = await _NoticeRepository.findByNoticeId(id);
+    this.post.value = post;
+  }
+
+  Future<void> Noticesave(String title, String content, String class_code, String create_date)async{
+    NTP post = await _NoticeRepository.Noticesave(title,content, class_code , create_date);
     if(post.id != null){
       posts.add(post);
     }

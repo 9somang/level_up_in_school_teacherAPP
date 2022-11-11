@@ -24,7 +24,7 @@ class Noticepage extends StatelessWidget{
             OutlinedButton.icon(
               // 텍스트버튼에 아이콘 넣기
               onPressed: () {
-                Get.to(()=> NoticeWritePage());
+                // Get.to(()=> NoticelistPage());
               },
               icon: Icon(Icons.check_box_rounded, size: 30, color: Colors.black87), // 아이콘 색
               label: Text('공지사항 확인하기'),

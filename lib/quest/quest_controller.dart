@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../post.dart';
+import '../model/post.dart';
 import 'QuestRepository.dart';
 
 class QuestController extends GetxController {

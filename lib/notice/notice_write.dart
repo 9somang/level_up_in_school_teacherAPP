@@ -1,4 +1,6 @@
+import 'package:admin/view/customtextareatwo.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../homepage.dart';
 import '../user/user_controller.dart';
 import '../validate.dart';
@@ -27,6 +29,7 @@ class NoticeWritePage extends StatelessWidget {
 
     NoticeController Nt = Get.put(NoticeController());
     UserController u = Get.find();
+    final create_date = Get.find<NoticeController>().create_date;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,27 +49,26 @@ class NoticeWritePage extends StatelessWidget {
             child: ListView(
               children: [
                 CustomTextFormField(
-                    controller: _school_code,
-                    hint: "학급코드",
-                    funValidator: null
-                ),
-                CustomTextFormField(
                     controller: _title,
                     hint: "제목",
                     funValidator: validateTitle()
                 ),
-                
-                CustomTextFormArea(
+                CustomTextFormAreatwo(
                     controller: _content,
                     hint: "내용",
                     funValidator: validateContent()
+                ),
+                CustomTextFormField(
+                    controller: _school_code,
+                    hint: "학급코드",
+                    funValidator: null
                 ),
                 CustomElevatedButton(
                   text: "공지사항 등록!",
                   funpageRoute: () async{
                     if( _formkey.currentState!.validate()) {
                       await Get.find<NoticeController>()
-                          .Noticesave(_title.text, _content.text,_school_code.text, "${u.principal.value.username}");
+                          .Noticesave(_title.text, _content.text,_school_code.text, DateFormat('yyyy-MM-dd').format(create_date));
                       Get.off(()=>HomePage());
                     }
                   },

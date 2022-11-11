@@ -42,7 +42,9 @@ class _HomePageState extends State<HomePage> {
     UserController u = Get.put(UserController());
     return Scaffold(
       appBar: AppBar(
-        title: Text('${u.principal.value.username} 선생님의 슬기로운 교사생활 !'),
+        title: Text('${u.principal.value.username}선생님의 슬기로운 교사생활 !',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)
+        ),
         centerTitle: true,
         backgroundColor: Colors.black,
         elevation: 0.0,

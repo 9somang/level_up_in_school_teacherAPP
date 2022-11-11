@@ -86,7 +86,9 @@ class LoginPage extends StatelessWidget {
                 if (result == 1) {
                   Get.offAll(HomePage());
                   showToastlogin('환영합니다.\n${u.principal.value.username} 선생님!');
-                }else {showToastlogin('로그인 실패');}
+                }else {
+                  showToastlogin('로그인 실패');
+                }
               }
             },
           ),

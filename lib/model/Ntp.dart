@@ -6,6 +6,7 @@ class NTP {
   final String? title;
   final String? content;
   final String? class_code;
+  final String? create_date;
 
 
   NTP( {
@@ -13,7 +14,7 @@ class NTP {
     this.title,
     this.content,
     this.class_code,
-
+    this.create_date
   });
 
 
@@ -21,5 +22,6 @@ class NTP {
       : id = json['id'],
         title = json['title'],
         content = json['content'],
-        class_code = json['class_code'];
+        class_code = json['class_code'],
+        create_date = json['current_date'];
 }

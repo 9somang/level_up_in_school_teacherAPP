@@ -29,7 +29,7 @@ class UserInfo extends StatelessWidget {
                         fontSize: 20
                     ),
                   ),
-                  Text("이메일 : ${u.principal.value.email}",
+                  Text("아이디 : ${u.principal.value.user_id}",
                     style: const TextStyle(
                         fontSize: 20
                     ),

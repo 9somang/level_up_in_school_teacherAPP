@@ -18,7 +18,7 @@ class Mainpage extends StatelessWidget{
                 Get.to(()=> userQuestlist());
               },
               icon: Icon(Icons.wysiwyg, size: 30, color: Colors.black87), // 아이콘 색
-              label: Text('학급 관리'),
+              label: Text('학급 퀘스트관리'),
               style: TextButton.styleFrom(primary: Colors.black), // 글자 색
             ),
           ],

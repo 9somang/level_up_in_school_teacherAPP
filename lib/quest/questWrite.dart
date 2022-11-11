@@ -5,6 +5,7 @@ import 'package:admin/view/customtextarea.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -68,12 +69,12 @@ class QuestWriteTwoPage extends State<QuestWritePage> {
                 ),
                 CustomTextFormField(
                     controller: _exp,
-                    hint: "경험치(Min:50,Max:500)",
+                    hint: "경험치(Min:10,Max:500)",
                     funValidator: null
                 ),
                 CustomTextFormField(
                     controller: _point,
-                    hint: "포인트(Min:20,Max:200)",
+                    hint: "포인트(Min:50,Max:500)",
                     funValidator: null
                 ),
                 CustomTextFormField(
@@ -112,6 +113,9 @@ class QuestWriteTwoPage extends State<QuestWritePage> {
                       await Get.find<QuestController>()
                       .Questsave( _title.text, _description.text ,int.parse(_exp.text),int.parse(_point.text),_class_code.text,pickedStdate, pickedEnddate);
                       Get.to(()=>HomePage());
+                      showToast("퀘스트 등록 완료!");
+                    }else{
+                      showToast("퀘스트 등록 실패!");
                     }
 
                   },
@@ -122,13 +126,13 @@ class QuestWriteTwoPage extends State<QuestWritePage> {
       ),
     );
   }
-  // void showToast(String message) {
-  //   Fluttertoast.showToast(
-  //       msg: message,
-  //       backgroundColor: Colors.indigo,
-  //       textColor: Colors.white,
-  //       toastLength: Toast.LENGTH_LONG,
-  //       gravity: ToastGravity.BOTTOM
-  //   );
-  // }
+  void showToast(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM
+    );
+  }
 }

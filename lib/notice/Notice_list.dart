@@ -1,9 +1,9 @@
-import 'package:admin/quest/questDetail.dart';
-import 'package:admin/quest/quest_controller.dart';
+import 'package:admin/notice/NoticeDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'notice_controller.dart';
+
 
 class Noticelist extends StatefulWidget {
 
@@ -26,7 +26,7 @@ class _NoticelistState extends State<Noticelist> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
-        title: Text("내가 등록한 퀘스트 목록",
+        title: Text("내가 등록한 공지사항",
           style: TextStyle(
               fontSize: 20,
               color: Colors.white
@@ -53,12 +53,12 @@ class _NoticelistState extends State<Noticelist> {
               return ListTile(
                 onTap: () async{
                   await nc.findByNoticeId(nc.posts[index].id!);
-                  Get.to(questDetailPage(nc.posts[index].id));
+                  Get.to(NoticeDetailPage(nc.posts[index].id));
                 },
                 title: Text("${nc.posts[index].title}",
                   style: TextStyle(fontSize: 17),
                 ),
-                subtitle: Text("포인트 : ${nc.posts[index].content}\n 학급코드 : ${nc.posts[index].class_code}"
+                subtitle: Text("작성일 : ${nc.posts[index].create_date}\n 학급코드 : ${nc.posts[index].class_code}"
                     ,style: TextStyle(fontSize: 13)
                 ),
                 leading: Text(

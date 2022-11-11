@@ -1,5 +1,7 @@
+import 'package:admin/homepage.dart';
 import 'package:admin/quest/quest_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -33,9 +35,9 @@ class questUpdatePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.black,
         elevation: 0.0,
-        title: Text("취업게시판 글 수정하기"),
+        title: Text("퀘스트 수정하기"),
         centerTitle: true,
       ),
       body: Padding(
@@ -56,12 +58,12 @@ class questUpdatePage extends StatelessWidget {
                 ),
                 CustomTextFormField(
                     controller: _exp,
-                    hint: "경험치(Min:50,Max:500)",
+                    hint: "경험치(Min:10,Max:500)",
                     funValidator: null
                 ),
                 CustomTextFormField(
                     controller: _point,
-                    hint: "포인트(Min:20,Max:200)",
+                    hint: "포인트(Min:50,Max:500)",
                     funValidator: null
                 ),
                 CustomTextFormField(
@@ -92,12 +94,14 @@ class questUpdatePage extends StatelessWidget {
 
                 ),
                 CustomElevatedButton(
-                    text: "글 수정하기",
+                    text: "퀘스트 수정하기",
                     funpageRoute: () async{
                       if( _formkey.currentState!.validate()) {
                         await qn.Questupdate(
                             qn.post.value.id ?? 0, _title.text, _description.text,int.parse(_exp.text),int.parse(_point.text),_class_code.text,pickedStdate, pickedEnddate
                         );
+                        Get.to(()=> HomePage());
+                        showToast("퀘스트 수정 완료");
                       }
                       // 같은 page가 있으면 이동할때 덮어씌우기 < 이게 레알 최고
                       Get.back(); //상태관리 Getx 라이브러리 - obs(데이터갱신)
@@ -107,6 +111,15 @@ class questUpdatePage extends StatelessWidget {
             )
         ),
       ),
+    );
+  }
+  void showToast(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM
     );
   }
 }

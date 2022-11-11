@@ -3,6 +3,8 @@ import 'package:admin/notice/notice_write.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../notice/Notice_list.dart';
+
 
 class Noticepage extends StatelessWidget{
   @override
@@ -24,7 +26,7 @@ class Noticepage extends StatelessWidget{
             OutlinedButton.icon(
               // 텍스트버튼에 아이콘 넣기
               onPressed: () {
-                // Get.to(()=> NoticelistPage());
+                Get.to(()=> Noticelist());
               },
               icon: Icon(Icons.check_box_rounded, size: 30, color: Colors.black87), // 아이콘 색
               label: Text('공지사항 확인하기'),

@@ -14,7 +14,7 @@ class questDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     //String data = Get.arguments;
     UserController u = Get.find();
-    QuestController qn = Get.find();
+    QuestController qn = Get.put(QuestController());
 
     return Scaffold(
         appBar: AppBar(

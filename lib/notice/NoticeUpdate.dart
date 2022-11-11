@@ -16,24 +16,28 @@ import 'notice_controller.dart';
 
 
 
-class NoticeWritePage extends StatelessWidget {
+class NoticeUpdatePage extends StatelessWidget {
 
   final _formkey = GlobalKey<FormState>();
   final _title = TextEditingController();
   final _content = TextEditingController();
-  final _school_code = TextEditingController();
+  final _class_code = TextEditingController();
 
 
   @override
   Widget build(BuildContext context) {
 
-    NoticeController Nt = Get.put(NoticeController());
+    NoticeController nc = Get.put(NoticeController());
     UserController u = Get.find();
+
+    _title.text= "${nc.post.value.title}";
+    _content.text= "${nc.post.value.content}";
+    _class_code.text = "${nc.post.value.class_code}";
     final create_date = Get.find<NoticeController>().create_date;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('공지사항 등록하기',
+        title: Text('공지사항 수정하기',
             style: TextStyle(
               fontFamily: 'GowunDodum',
               fontSize: 20,
@@ -59,19 +63,19 @@ class NoticeWritePage extends StatelessWidget {
                     funValidator: validateContent()
                 ),
                 CustomTextFormField(
-                    controller: _school_code,
+                    controller: _class_code,
                     hint: "학급코드",
                     funValidator: null
                 ),
                 CustomElevatedButton(
-                  text: "공지사항 등록!",
+                  text: "공지사항 수정하기",
                   funpageRoute: () async{
                     if( _formkey.currentState!.validate()) {
-                      await Get.find<NoticeController>()
-                          .Noticesave(
+                      await nc.Noticeupdate(
+                          nc.post.value.id ?? 0,
                           _title.text,
                           _content.text,
-                          _school_code.text,
+                          _class_code.text,
                           DateFormat('yyyy-MM-dd').format(create_date));
                       Get.off(()=>HomePage());
                     }

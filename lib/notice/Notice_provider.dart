@@ -11,18 +11,18 @@ UserController u = Get.find();
 class NoticeProvider extends GetConnect {
 
   Future<Response> Noticesave(Map data) =>
-      post("$host/notice/app/${u.principal.value.user_id}", data);
+      post("$host/notice/app/${u.principal.value.user_id}", data, headers: {"authorization" : jwtToken ?? ""});
 
   Future<Response> findAllNoticelist() =>
-      get("$host/notice/app/", headers: {"authorization" : jwtToken ?? ""});
+      get("$host/notice/app/${u.principal.value.user_id}", headers: {"authorization" : jwtToken ?? ""});
 
   Future<Response> findByNoticeId(int id) =>
-      get("$host/notice/app/$id", headers: {"authorization" : jwtToken ?? ""});
+      get("$host/notice/app/${u.principal.value.user_id}/$id", headers: {"authorization" : jwtToken ?? ""});
 
-// Future<Response> deleteByNoticeId(int id) =>
-//     delete("$host/jobnotice/$id", headers: {"authorization" : jwtToken ?? ""});
-//
-// Future<Response> Noticeupdate(int id, Map data) =>
-//     put("$host/jobnotice/$id", data,headers: {"authorization" : jwtToken ?? ""});
+  Future<Response> deleteByNoticeId(int id) =>
+      delete("$host/notice/app/${u.principal.value.user_id}/$id", headers: {"authorization" : jwtToken ?? ""});
+
+  Future<Response> Noticeupdate(int id, Map data) =>
+      put("$host/notice/app/${u.principal.value.user_id}/$id", data,headers: {"authorization" : jwtToken ?? ""});
 
 }

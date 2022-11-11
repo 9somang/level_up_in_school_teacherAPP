@@ -1,28 +1,29 @@
+import 'package:admin/notice/NoticeUpdate.dart';
 import 'package:admin/quest/questUpdate.dart';
 import 'package:admin/quest/quest_controller.dart';
-import 'package:admin/userQuest/userquestController.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../homepage.dart';
 import '../user/user_controller.dart';
+import 'notice_controller.dart';
 
-class userquestDetailPage extends StatelessWidget {
+
+class NoticeDetailPage extends StatelessWidget {
   final int? id;
 
-  const userquestDetailPage(this.id);
+  const NoticeDetailPage(this.id);
 
   @override
   Widget build(BuildContext context) {
     //String data = Get.arguments;
     UserController u = Get.find();
-    userQuestController uqn = Get.find();
+    NoticeController nc = Get.find();
 
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
           elevation: 0.0,
-          title: Text("등록한 퀘스트"),
+          title: Text("등록한 공지사항"),
           centerTitle: true,
         ),
 
@@ -31,43 +32,50 @@ class userquestDetailPage extends StatelessWidget {
           child: Obx(()=> Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${uqn.post.value.title}",
+              Text("${nc.post.value.title}",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23)
               ),
               Divider(),
               Container(
-                child: Text("시작일 : ${uqn.post.value.pickedStdate}, 종료일 : ${uqn.post.value.pickedEnddate}"),
+                child: Text("작성일 : ${nc.post.value.create_date}"),
               ),
               Container(
-                child: Text("경험치 : ${uqn.post.value.exp}, 포인트 : ${uqn.post.value.point}"),
-              ),
-              Container(
-                child: Text("학생 : ${uqn.post.value.user_id}"),
+                child: Text("학급 코드 : ${nc.post.value.class_code}"),
               ),
               SizedBox(height: 5),
 
-              if (uqn.post.value.done != false
+              if (u.principal.value.id != null
               ) Row(
                 children: [
                   SizedBox(width: 7),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
+                        primary: Colors.indigo,
                         onPrimary: Colors.white,
                       ),
                       onPressed: () {
-                         _checkDialog(context);// Done ( controller ) 함수 실행시키기
+                        _deleteDialog(context); // 상태관리로 갱신 시킬 수 있음.
                       },
-                      child: Text("퀘스트 완료 승인하기")
+                      child: Text("삭제")
                   ),
                   SizedBox(width: 7),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.indigo,
+                        onPrimary: Colors.white,
+                      ),
+                      onPressed: () {
+                        Get.to(()=> NoticeUpdatePage());
+                      },
+                      child: Text("수정")
+                  ),
                   SizedBox(width: 10),
                 ],
               ) else SizedBox(),
               SizedBox(height:7),
               Expanded(
                   child: SingleChildScrollView(
-                    child: Text("${uqn.post.value.discription}"),
+                    child: Text("${nc.post.value.content}"),
                   )
               ),
             ],
@@ -79,19 +87,18 @@ class userquestDetailPage extends StatelessWidget {
 }
 
 
-void _checkDialog(BuildContext context) {
-  final user_id = Get.find<userQuestController>().post.value.user_id;
-  userQuestController  uqn = Get.find();
+void _deleteDialog(BuildContext context) {
+  NoticeController  nc = Get.find();
   showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("퀘스트 완료를 승인하시겠습니까?"),
+          title: Text("정말로 공지사항을 삭제하시겠습니까?"),
           content: SingleChildScrollView(
             child: ListBody(
                 children: const <Widget>[
-                  Text('퀘스트를 완료를 승인하고 해당 학생에게 포인트와 경험치를 수여합니다.')
+                  Text('공지사항을 삭제하면 되돌릴 수 없습니다.')
                 ]
             ),
           ),
@@ -100,8 +107,8 @@ void _checkDialog(BuildContext context) {
               child: Text("예"),
               onPressed: () async{
                 Navigator.of(context).pop(); // 저장소에서 해당 게시물삭제
-                _checkDialog(context);
-                await uqn.QuestCheck(uqn.post.value.id ?? 0);
+                _deleteDialog(context);
+                await nc.deleteByNoticeId(nc.post.value.id!);
                 Get.off(()=> HomePage());
               },
             ),
@@ -113,7 +120,6 @@ void _checkDialog(BuildContext context) {
             )
           ],
         );
-      }
-      );
+      });
 }
 

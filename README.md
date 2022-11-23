@@ -1,16 +1,6 @@
-# admin
+# 학교에서 레벨업 _ 교사용 (flutter) 앱
 
-A new Flutter project.
+전국고등학교 동아리 소프트웨어 경진대회 은상(2위) 수상작
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+프로젝트 구조 :
+학교에서 레벨업 학생용(유니티 게임앱) - 파이썬 flask 서버 - 학교에서 레벨업 교사용(flutter 앱) 으로 나뉘어져 있음.ㄹ
